@@ -1,9 +1,9 @@
 <?php
 
-// class Sample_List_Table{
-//     public function generate_table(){
+class Sample_List_Table{
+    public function generate_table(){
 ?>
-<!-- <table class="wp-list-table widefat fixed books">
+<table class="wp-list-table widefat fixed books">
         <thead>
             <tr>
                 <th><?php _e("Book name", "sample-plugin"); ?></th>
@@ -11,33 +11,39 @@
                 <th><?php _e("Author", "sample-plugin"); ?></th>
             </tr>
         </thead>
-        <tbody> -->
+        <tbody>
 <?php 
-        // $args = array(
-        //     'post_type' => array('books'),
-        //     'posts_per_page' => -1
-        // );
-        // $query = new WP_Query($args);
-        // if($query->have_posts(  )){
-        //     while($query->have_posts(  )){
-        //         echo "<tr>";
-        //         $query->the_post();
-        //         $sku = get_post_meta( get_the_ID(  ), "sp_sku", true );
-        //         $author = get_post_meta( get_the_ID(  ), "sp_author", true );
-        //         echo "<td>".get_the_title().    "</td>";
-        //         echo "<td>".$sku.    "</td>";
-        //         echo "<td>".$author.    "</td>";
+        $args = array(
+            'post_type' => array('books'),
+            'posts_per_page' => -1
+        );
+        $query = new WP_Query($args);
+        if($query->have_posts(  )){
+            while($query->have_posts(  )){
+                echo "<tr>";
+                $query->the_post();
+                $sku = get_post_meta( get_the_ID(  ), "sp_sku", true );
+                $author = get_post_meta( get_the_ID(  ), "sp_author", true );
+                echo "<td>".get_the_title().    "</td>";
+                echo "<td>".$sku.    "</td>";
+                echo "<td>".$author.    "</td>";
 
-        //         echo "</tr>";
-        //     }
-        // }
+                echo "</tr>";
+            }
+        }
 ?>
-        <!-- </tbody> -->
-<!-- </table> -->
+        </tbody> 
+ </table>
 <?php
-//     }
+    }
 
-// }
+}
+
+
+/*
+* THIS SCRIPT IS FOR CUSTOM TABLES, AND SHOW THEIR RECORDS WITH WP_LIST_TABLE
+* INCOMPLETE SCRIPT
+* RFF: https://www.sitepoint.com/using-wp_list_table-to-create-wordpress-admin-tables/
 
 if(! class_exists('WP_List_Table') ){
     require_once ABSPATH."wp-admin/includes/class-wp-list-table.php";
@@ -61,5 +67,23 @@ class Sample_List_Table extends WP_List_Table{
             $sql .= ' ORDER BY '. esc_sql( $_REQUEST['orderby'] );
             $sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' ASC';
         }
+
+        $sql .= "LIMIT ".$per_page;
+
+        $sql .= "OFFSET ".($page_number - 1) * $per_page;
+
+        $result = $wpdb->get_results($sql, ARRAY_A);
+
+        return $result;
+
+    }
+
+    public function delete_customer ($id){
+        global $wpdb;
+
+        $wpdb->delete(
+            "{}books"
+        );
     }
 }
+*/
