@@ -62,6 +62,8 @@ class Sample_Plugin_Admin {
 		require_once plugin_dir_path( dirname(__FILE__) ). "admin/class-books-posttype.php";
 		require_once plugin_dir_path( dirname(__FILE__) )."admin/class-books-metaboxes.php";
 		require_once plugin_dir_path( dirname(__FILE__) )."admin/class-sample-plugin-menu.php";
+		require_once plugin_dir_path( dirname(__FILE__) )."admin/widgets/class-sample-site-logo.php";
+		require_once plugin_dir_path( dirname(__FILE__) )."admin/partials/class-sample-custom-new-ticker.php";
 		
 	}
 
@@ -80,6 +82,14 @@ class Sample_Plugin_Admin {
 	public function register_menu(){
 		$menu_class = new Sample_Plugin_Menu();
 		$menu_class->add_main_menu();
+	}
+	public function site_logo_widget(){
+		// $widget_class = new Sample_Site_Logo_Widget();
+		register_widget( "Sample_Site_Logo_Widget" );
+	}
+	public function news_ticker(){
+		$news_ticker_class = new Sample_Custom_News_Ticker();
+		$news_ticker_class->menu_item();
 	}
 
 	/**

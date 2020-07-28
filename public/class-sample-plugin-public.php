@@ -58,6 +58,7 @@ class Sample_Plugin_Public {
 
 	public function load_dependencies(){
 		require_once plugin_dir_path( dirname(__FILE__) )."public/class-sample-registration-login.php";
+		require_once plugin_dir_path( dirname(__FILE__) )."public/partials/class-sample-news-ticker.php";
 	}
 
 	public function user_registration_login(){
@@ -65,6 +66,10 @@ class Sample_Plugin_Public {
 		$reg_login_class->init();
 	}
 
+	public function newsticker_shortcode(){
+		$newsticker_class = new Sample_News_Ticker();
+		$newsticker_class->init();
+	}
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
@@ -108,6 +113,7 @@ class Sample_Plugin_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sample-plugin-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name."news-ticker", plugin_dir_url( __FILE__ ) . 'js/sample-news-ticker.js', array( 'jquery' ), $this->version, false );
 
 	}
 

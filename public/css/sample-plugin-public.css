@@ -2,3 +2,7 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+ .sample-news-ticker{
+     background-color: lightblue;
+     padding: 8px;
+ }
